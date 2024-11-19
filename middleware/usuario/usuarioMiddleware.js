@@ -17,6 +17,20 @@ const validarContrasenas = (req, res, next) => {
     }
   };
 
+const validarFormatoNombre = (req, res, next) => {
+  const { nombre } = req.body;
+
+  // Expresión regular que solo permite letras, números y guion bajo
+  const nombreRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9_]+$/;
+
+  if (!nombreRegex.test(nombre)) {
+    return res.status(400).json({
+      msg: 'El nombre solo puede contener letras, números y guion bajo (_). No se permiten espacios ni guiones (-)'
+    });
+  }
+
+  next();
+};
 
   const validarUsuarioExistente = async (req, res, next) => {
     let {nombre,correo} = req.body
@@ -31,5 +45,6 @@ const validarContrasenas = (req, res, next) => {
   };
   module.exports = {
     validarUsuarioExistente,
-    validarContrasenas
+    validarContrasenas,
+    validarFormatoNombre
   }

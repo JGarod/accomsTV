@@ -74,8 +74,13 @@ let usuario = {
 // Perfil del usuario (ruta protegida)
 const perfilUsuario = async (req, res) => {
   try {
-    const user = await User.findByPk(req.usuarioId);
-    res.json(user);
+    const user = await User.findOne({
+      where: {
+        id: req.usuarioId
+      },
+      attributes: ['nombre', 'id', 'logo', 'portada', 'correo'],
+    });
+    return res.json(user);
   } catch (err) {
     res.status(500).send({
       msg:'Error al obtener el perfil'

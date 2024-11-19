@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../../models/Usuario');
+const { Op } = require('sequelize');
 require('dotenv').config();
 
 
@@ -11,7 +12,7 @@ const getCanalesOnline = async (req, res) => {
     attributes:['nombre','id','logo']
     });
 
-    return res.json({ msg: 'Usuarios online', canales: usuarios,usuario:req.body.usuarioi });
+    return res.json({ msg: 'Usuarios online', canales: usuarios });
   } catch (err) {
     console.log(err)
    return res.status(500).send({
@@ -30,6 +31,12 @@ const getCanal = async (req, res) => {
     }
     });
 
+    if (!usuario) {
+      return res.status(404).send({
+        msg: 'Este canal no existe'
+      });
+    }
+
     return res.json({  canal: usuario });
   } catch (err) {
     console.log(err)
@@ -39,7 +46,30 @@ const getCanal = async (req, res) => {
   }
 };
 
+const getCanalesPorNombre = async (req, res) => {
+  try {
+    // Crear el usuario en la base de datos
+    const usuarios = await User.findAll({
+      attributes: ['nombre', 'id', 'logo'],
+      where: {
+        nombre: {
+          [Op.like]: `%${req.params.nombre}%` // Busca coincidencias parciales
+        }
+      },
+      limit: 30
+    });
+
+    return res.json({ msg: 'Canales encontrados', canales: usuarios });
+  } catch (err) {
+    console.log(err)
+    return res.status(500).send({
+      msg: 'Error al buscar los canales'
+    });
+  }
+};
+
 module.exports ={
     getCanalesOnline,
-    getCanal
+  getCanal,
+  getCanalesPorNombre
 }

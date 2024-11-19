@@ -25,6 +25,9 @@ const User = sequelize.define('User', {
   },
   portada: {
     type: DataTypes.STRING,
+  },
+  streamKey: {
+    type: DataTypes.STRING,
   }
 }, {
   tableName: 'usuarios',  // Nombre de la tabla en MySQL

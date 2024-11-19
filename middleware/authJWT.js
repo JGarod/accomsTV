@@ -23,7 +23,7 @@ const verificarToken = async (req, res, next) => {
     console.log(decoded);
     req.usuarioId = decoded.id;
     const user = await User.findOne({ where: { id :req.usuarioId  }, attributes: ['id','nombre','logo','portada']});
-    req.body.usuarioi = user;
+    req.usuarioi = user;
     next();
   });
 };
