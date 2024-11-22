@@ -9,7 +9,7 @@ const config = {
         ping_timeout: 60,
         max_connections: 1000  // Ajusta según tus necesidades
     },
-    http: {
+    https: {
         port: 8000,
         mediaroot: './media',
         allow_origin: '*'
