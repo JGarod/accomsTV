@@ -10,13 +10,16 @@ const config = {
         max_connections: 1000
     },
     http: {
-        port: 8000,  // Puerto para HLS
-        mediaroot: './media', // Ruta donde se almacenan los archivos de video
+        port: 8000,
+        mediaroot: './media',
+        allow_origin: '*'
+    },
+    https: {  // Agregar una sección específica para HTTPS
+        port: 8000,
+        mediaroot: './media',
         allow_origin: '*',
-        ssl: { // Agregar soporte SSL para HLS en el puerto 8000
-            key: './certs/accomz.work.gd.key', // Ruta al archivo .key
-            cert: './certs/accomz.work.gd.cer', // Ruta al archivo .cer
-        }
+        key: './certs/accomz.work.gd.key',
+        cert: './certs/accomz.work.gd.cer'
     },
     auth: {
         play: false,
