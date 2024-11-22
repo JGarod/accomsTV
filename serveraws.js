@@ -35,6 +35,11 @@ const usersAssetsPath = path.join(__dirname, 'assets/usuarios');
 console.log('Ruta de imágenes:', usersAssetsPath);
 app.use('/assets/usuarios', express.static(usersAssetsPath));
 
+
+// Definir las rutas absolutas a los certificados
+const certsPath = path.join(__dirname, '..', 'certs');
+const keyPath = path.join(certsPath, 'accomz.work.gd.key');
+const certPath = path.join(certsPath, 'accomz.work.gd.cer');
 const config = {
   rtmp: {
     port: 1935,
@@ -42,7 +47,7 @@ const config = {
     gop_cache: true,
     ping: 30,
     ping_timeout: 60
-  },
+  },  
   http: {
     port: 8000,
     mediaroot: './media',
@@ -52,7 +57,8 @@ const config = {
     port: 8443,
     mediaroot: './media',
     allow_origin: '*',
-    ...httpsOptions  // Usar las mismas opciones que funcionan en el puerto 3000
+    key: keyPath,    // Usar la ruta absoluta
+    cert: certPath   // Usar la ruta absoluta  // Usar las mismas opciones que funcionan en el puerto 3000
   },
   auth: {
     play: false,
