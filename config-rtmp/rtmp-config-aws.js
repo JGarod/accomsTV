@@ -1,5 +1,7 @@
 // config/nmsConfig.js
 require('dotenv').config();
+const path = require('path');
+
 const config = {
     rtmp: {
         port: 1935,
@@ -14,8 +16,8 @@ const config = {
         mediaroot: './media', // Ruta donde se almacenan los archivos de video
         allow_origin: '*',
         ssl: { // Agregar soporte SSL para HLS en el puerto 8000
-            key: '../certs/accomz.work.gd.key', // Ruta al archivo .key
-            cert: '../certs/accomz.work.gd.cer', // Ruta al archivo .cer
+            key: path.join(__dirname, '../certs/accomz.work.gd.key'), // Ruta correcta al archivo .key
+            cert: path.join(__dirname, '../certs/accomz.work.gd.cer'), // Ruta correcta al archivo .cer
         }
     },
     auth: {
@@ -38,5 +40,8 @@ const config = {
         ]
     }
 };
+
+module.exports = config;
+
 
 module.exports = config;
