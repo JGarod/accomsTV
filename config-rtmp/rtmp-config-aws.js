@@ -1,5 +1,11 @@
 // config/nmsConfig.js
 require('dotenv').config();
+const path = require('path');
+
+const certsPath = path.join(__dirname, '..', 'certs');
+const keyPath = path.join(certsPath, 'accomz.work.gd.key');
+const certPath = path.join(certsPath, 'accomz.work.gd.cer');
+
 const config = {
     rtmp: {
         port: 1935,
@@ -18,8 +24,8 @@ const config = {
         port: 8443,  // Puerto diferente para HTTPS
         mediaroot: './media',
         allow_origin: '*',
-        key: './certs/accomz.work.gd.key',
-        cert: './certs/accomz.work.gd.cer'
+        key: keyPath,    // Usar la ruta absoluta
+        cert: certPath   //
     },
     auth: {
         play: false,
