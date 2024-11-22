@@ -10,12 +10,12 @@ const config = {
         max_connections: 1000
     },
     http: {
-        port: 8000,
+        port: 8000,  // Puerto para HTTP
         mediaroot: './media',
         allow_origin: '*'
     },
-    https: {  // Agregar una sección específica para HTTPS
-        port: 8000,
+    https: {
+        port: 8443,  // Puerto diferente para HTTPS
         mediaroot: './media',
         allow_origin: '*',
         key: './certs/accomz.work.gd.key',
