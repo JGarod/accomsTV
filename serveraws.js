@@ -8,7 +8,7 @@ const NodeMediaServer = require('node-media-server');
 const setupChatSockets = require('./routes/sockets/chatsockets/chatSockets');
 const https = require('https'); // Para usar HTTPS
 const fs = require('fs'); // Para leer los archivos del certificado
-const config = require('./config-rtmp/rtmp-config');
+const config = require('./config-rtmp/rtmp-config-aws');
 const streamManager = require('./config-rtmp/stream-config');
 const path = require('path');
 
