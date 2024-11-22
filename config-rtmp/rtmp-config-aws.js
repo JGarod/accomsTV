@@ -9,7 +9,7 @@ const config = {
         ping_timeout: 60,
         max_connections: 1000
     },
-    http: {
+    https: {
         port: 8000, // Puerto para HLS
         mediaroot: './media', // Ruta donde se almacenan los archivos de video
         allow_origin: '*',
