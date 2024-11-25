@@ -43,18 +43,26 @@ const setupChatSockets = (server) => {
 
     // Unirse a una sala
     socket.on('join-room', (room) => {
+      // Primero, salir de todas las salas actuales
+      const rooms = Array.from(socket.rooms);
+      rooms.forEach(existingRoom => {
+        if (existingRoom !== socket.id) {
+          socket.leave(existingRoom);
+          console.log(`Automatically left room: ${existingRoom}`);
+        }
+      });
+
+      // Luego unirse a la nueva sala
       socket.join(room);
 
-      // Si la sala no existe en nuestro registro, inicializamos el contador
       if (!roomUsersCount[room]) {
         roomUsersCount[room] = 0;
       }
-
-      // Incrementar el contador de usuarios en la sala
       roomUsersCount[room] += 1;
+
       console.log(`User ${socket.id} joined room: ${room}. Users in room: ${roomUsersCount[room]}`);
 
-      // Si había un temporizador de eliminación de la sala, lo cancelamos
+      // Cancelar cualquier temporizador de eliminación de sala
       if (roomTimers[room]) {
         clearTimeout(roomTimers[room]);
         delete roomTimers[room];
