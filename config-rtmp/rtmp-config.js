@@ -1,5 +1,6 @@
 // config/nmsConfig.js
-require('dotenv').config();
+// require('dotenv').config();
+const ffmpegPath = require('ffmpeg-static');
 const config = {
     rtmp: {
         port: 1935,
@@ -19,7 +20,8 @@ const config = {
         publish: false
     },
     trans: {
-        ffmpeg: `${process.env.FFMPEG}`,
+        // ffmpeg: `${process.env.FFMPEG}`,
+        ffmpeg: ffmpegPath,
         tasks: [
             {
                 app: 'live',

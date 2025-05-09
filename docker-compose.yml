@@ -1,0 +1,35 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+      - "8000:8000"
+      - "1935:1935"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=admin
+      - DB_NAME=accoomztv
+      - DB_PORT=3306
+      - JWT_SECRET=q2Q0GqyNW|1\rJ:o}u0J2}L.+HIs.hR
+      - PORT=3000
+      - FFMPEG_PATH=/app/ffmpeg/bin/ffmpeg
+    volumes:
+      - ./:/app
+      - /app/node_modules
+      # - ../ffmpeg-7.1-full_build:/app/ffmpeg
+
+  db:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=accoomztv
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
