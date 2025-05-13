@@ -25,4 +25,4 @@ const StreamUsuario = sequelize.define('StreamUsuario', {
   timestamps: false
 });
 
-module.exports = User;
+module.exports = StreamUsuario;

@@ -18,8 +18,8 @@ services:
       - FFMPEG_PATH=/app/ffmpeg/bin/ffmpeg
     volumes:
       - ./:/app
-      - /app/node_modules
-      # - ../ffmpeg-7.1-full_build:/app/ffmpeg
+      # - /app/node_modules
+      - ../ffmpeg-7.1-full_build:/app/ffmpeg
 
   db:
     image: mysql:8.0
