@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 
 services:
   app:
@@ -62,21 +62,19 @@ services:
       - html:/usr/share/nginx/html
     restart: unless-stopped
 
-
   # Let's Encrypt para certificados SSL automáticos
-letsencrypt:
-  image: jrcs/letsencrypt-nginx-proxy-companion
-  container_name: nginx-letsencrypt
-  environment:
-    - NGINX_PROXY_CONTAINER=nginx-proxy
-    - DEFAULT_EMAIL=garode01@gmail.com
-    - LETSENCRYPT_HOST=accomz.duckdns.org  # <--- Añadir esta línea
-  volumes:
-    - /var/run/docker.sock:/var/run/docker.sock:ro
-    - certs:/etc/nginx/certs
-    - vhost:/etc/nginx/vhost.d
-    - html:/usr/share/nginx/html
-  restart: unless-stopped
+  nginx-letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: nginx-letsencrypt
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+      - DEFAULT_EMAIL=garode01@gmail.com
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - certs:/etc/nginx/certs
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+    restart: unless-stopped
 
 volumes:
   mysql_data:
