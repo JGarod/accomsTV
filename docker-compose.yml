@@ -16,7 +16,7 @@ services:
       - FFMPEG_PATH=/app/ffmpeg/bin/ffmpeg
       - VIRTUAL_HOST=accomz.duckdns.org
       - LETSENCRYPT_HOST=accomz.duckdns.org
-      - LETSENCRYPT_EMAIL=tu_correo@gmail.com
+      - LETSENCRYPT_EMAIL=garode01@gmail.com
       - VIRTUAL_PORT=3000   # 👈 ESTA ES LA LÍNEA CLAVE
     expose:
       - "3000"
