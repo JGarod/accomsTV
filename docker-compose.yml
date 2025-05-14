@@ -1,10 +1,8 @@
+version: "3"
+
 services:
   app:
     build: .
-    ports:
-      - "3000:3000"
-      - "8000:8000"
-      - "1935:1935"
     depends_on:
       - db
     environment:
@@ -16,9 +14,15 @@ services:
       - JWT_SECRET=q2Q0GqyNW|1\rJ:o}u0J2}L.+HIs.hR
       - PORT=3000
       - FFMPEG_PATH=/app/ffmpeg/bin/ffmpeg
+      - VIRTUAL_HOST=accomz.duckdns.org
+      - LETSENCRYPT_HOST=accomz.duckdns.org
+      - LETSENCRYPT_EMAIL=tu_correo@gmail.com
+    expose:
+      - "3000"
+      - "8000"
+    ports:
+      - "1935:1935"  # Solo dejamos RTMP expuesto directamente
     volumes:
-      # - ./:/app
-      # - /app/node_modules
       - ../ffmpeg-7.1-full_build:/app/ffmpeg
 
   db:
@@ -31,5 +35,46 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
 
+  # Servicio para mantener actualizado DuckDNS
+  duckdns:
+    image: linuxserver/duckdns
+    container_name: duckdns
+    environment:
+      - SUBDOMAINS=accomz
+      - TOKEN=4d342d91-e58a-4be5-aa79-ed55e3496609
+      - TZ=America/Mexico_City
+    restart: unless-stopped
+
+  # Proxy inverso con NGINX
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - certs:/etc/nginx/certs
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+    restart: unless-stopped
+
+  # Let's Encrypt para certificados SSL automáticos
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: nginx-letsencrypt
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+      - DEFAULT_EMAIL=garode01@gmail.com
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - certs:/etc/nginx/certs
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+    restart: unless-stopped
+
 volumes:
   mysql_data:
+  certs:
+  vhost:
+  html:
