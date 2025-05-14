@@ -17,6 +17,7 @@ services:
       - VIRTUAL_HOST=accomz.duckdns.org
       - LETSENCRYPT_HOST=accomz.duckdns.org
       - LETSENCRYPT_EMAIL=tu_correo@gmail.com
+      - VIRTUAL_PORT=3000   # 👈 ESTA ES LA LÍNEA CLAVE
     expose:
       - "3000"
       - "8000"
