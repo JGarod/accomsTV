@@ -50,6 +50,8 @@ services:
   nginx-proxy:
     image: jwilder/nginx-proxy
     container_name: nginx-proxy
+    environment:
+      - VIRTUAL_HOST=accomz.duckdns.org
     ports:
       - "80:80"
       - "443:443"
@@ -59,6 +61,7 @@ services:
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
     restart: unless-stopped
+
 
   # Let's Encrypt para certificados SSL automáticos
   letsencrypt:
