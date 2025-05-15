@@ -25,6 +25,7 @@ RUN if ! grep -q '"start":' package.json; then npm pkg set scripts.start="node s
 EXPOSE 3000
 EXPOSE 8000
 EXPOSE 1935
+EXPOSE 8443
 
 # Comando para iniciar la aplicación
 CMD ["npm", "start"]

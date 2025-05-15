@@ -17,6 +17,7 @@ services:
     ports:
       - "3000:3000"     # 👈 Exponemos el backend web para ngrok
       - "1935:1935"     # 👈 RTMP para ngrok tcp
+      - "8443:8443"     # 👈 RTMP para ngrok tcp
     volumes:
       - ../ffmpeg-7.1-full_build:/app/ffmpeg
 
