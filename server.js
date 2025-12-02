@@ -16,15 +16,14 @@ const app = express();
 
 // Middleware
 app.use(bodyParser.json());
-app.enableCors({
+app.use(cors({
   origin: [
-    'https://accomzfrontend.vhrt6n.easypanel.host', // FRONT
-    'http://localhost:4200', // por si pruebas local
+    'https://accomzfrontend.vhrt6n.easypanel.host',
+    'http://localhost:4200'
   ],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-  credentials: true,
-});
-
+  credentials: true
+}));
 const server = http.createServer(app);
 setupChatSockets(server); // Solo configura y no almacenas la instancia
 // Rutas
