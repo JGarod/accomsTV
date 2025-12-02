@@ -2,9 +2,9 @@
 require('dotenv').config();
 const path = require('path');
 
-const certsPath = path.join(__dirname, '..', 'certs');
-const keyPath = path.join(certsPath, 'accomz.work.gd.key');
-const certPath = path.join(certsPath, 'accomz.work.gd.cer');
+// const certsPath = path.join(__dirname, '..', 'certs');
+// const keyPath = path.join(certsPath, 'accomz.work.gd.key');
+// const certPath = path.join(certsPath, 'accomz.work.gd.cer');
 
 const config = {
     rtmp: {
@@ -21,16 +21,16 @@ const config = {
         allow_origin: '*'
     },
     https: {
-        enable: true, // Habilitar explícitamente HTTPS
-        port: 8443,
-        host: '0.0.0.0', // Escuchar en todas las interfaces
-        mediaroot: './media',
-        allow_origin: '*',
-        key: keyPath,    // Usar la ruta absoluta
-        cert: certPath,
-        handshakeTimeout: 120, // Timeout del handshake en segundos
-        requestCert: false,
-        rejectUnauthorized: false
+        enable: false, // Habilitar explícitamente HTTPS
+        // port: 8443,
+        // // host: '0.0.0.0', // Escuchar en todas las interfaces
+        // mediaroot: './media',
+        // allow_origin: '*',
+        // // key: keyPath,    // Usar la ruta absoluta
+        // // cert: certPath,
+        // handshakeTimeout: 120, // Timeout del handshake en segundos
+        // // requestCert: false,
+        // rejectUnauthorized: false
     },
     auth: {
         play: false,
