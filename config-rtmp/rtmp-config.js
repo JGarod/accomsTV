@@ -15,18 +15,18 @@ const config = {
         mediaroot: './media',
         allow_origin: '*'
     },
-    https: {
-        enable: true, // Habilitar explícitamente HTTPS
-        port: 8443,
-        host: '0.0.0.0', // Escuchar en todas las interfaces
-        mediaroot: './media',
-        allow_origin: '*',
-        key: keyPath,    // Usar la ruta absoluta
-        cert: certPath,
-        handshakeTimeout: 120, // Timeout del handshake en segundos
-        requestCert: false,
-        rejectUnauthorized: false
-    },
+    // https: {
+    //     enable: true, // Habilitar explícitamente HTTPS
+    //     port: 8443,
+    //     host: '0.0.0.0', // Escuchar en todas las interfaces
+    //     mediaroot: './media',
+    //     allow_origin: '*',
+    //     key: keyPath,    // Usar la ruta absoluta
+    //     cert: certPath,
+    //     handshakeTimeout: 120, // Timeout del handshake en segundos
+    //     requestCert: false,
+    //     rejectUnauthorized: false
+    // },
     auth: {
         play: false,
         publish: false
